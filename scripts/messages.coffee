@@ -25,3 +25,6 @@ module.exports = (robot) ->
   robot.hear /it is what it is/gim, (res) ->
     res.send " > At the end of the day."
 
+  robot.hear /spatoon/gim, (res) ->
+    res.send " > If I pick up a can and it's got spit in it, I'm not gonna say a word.  I'll go get in my kudober, drive to my house, grab my shotgun, and BLOW YOUR MOTHER FUCKING HEAD OFF!"
+
