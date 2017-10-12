@@ -22,3 +22,6 @@ module.exports = (robot) ->
   robot.hear /open the/gim, (res) ->
     res.send " > I'm sorry, Dave. I'm afraid I can't do that."
 
+  robot.hear /it is what it is/gim, (res) ->
+    res.send " > At the end of the day."
+
