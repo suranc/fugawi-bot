@@ -31,7 +31,7 @@ module.exports = (robot) ->
   robot.hear /problem/gim, (res) ->
     res.send " > I believe you mean, Opportunity."
 
-  robot.respond /upset/gim, (res) ->
+  robot.hear /upset/gim, (res) ->
     res.send " > I believe you mean, peptomistic."
 
   robot.hear /peptomis(m|tic)/gim, (res) ->
