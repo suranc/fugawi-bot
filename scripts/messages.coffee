@@ -38,4 +38,6 @@ module.exports = (robot) ->
     pepto = res.match[0]
     res.send "#{pepto}?  What does that even mean?\n > Uhhhhhhhhhhhhh..... Upset."
 
+  robot.hear /!wink/gim, (res) ->
+    res.send "https://i.imgur.com/RD8fp5e.png"
 
