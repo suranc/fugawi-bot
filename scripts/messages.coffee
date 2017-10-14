@@ -40,7 +40,7 @@ module.exports = (robot) ->
 
   robot.hear /!wink/gim, (res) ->
 #    res.send "https://i.imgur.com/RD8fp5e.png"
-    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/RD8fp5e.png", {as_user: true, unfurl_links: true})
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/RD8fp5e.png", {as_user: true, unfurl_links: false})
 
 #  robot.hear /!wink/gim, (res) ->
 #    res.send "https://i.imgur.com/cuoeN6C.gif"
