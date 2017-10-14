@@ -35,7 +35,7 @@ module.exports = (robot) ->
     res.send " > I believe you mean, peptomistic."
 
   robot.hear /peptomis(m|tic)/gim, (res) ->
-    pepto = res.match[1]
+    pepto = res.match[0]
     res.send "Peptomis#{pepto}?  What does that even mean?\n > Uhhhhhhhhhhhhh..... Upset."
 
 
