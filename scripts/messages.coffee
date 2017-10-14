@@ -41,6 +41,6 @@ module.exports = (robot) ->
   robot.hear /!wink/gim, (res) ->
     res.send "https://i.imgur.com/RD8fp5e.png"
 
-  robot.hear /!wink/gim, (res) ->
-    res.send "https://i.imgur.com/cuoeN6C.gif"
+#  robot.hear /!wink/gim, (res) ->
+#    res.send "https://i.imgur.com/cuoeN6C.gif"
 
