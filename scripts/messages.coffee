@@ -43,6 +43,11 @@ module.exports = (robot) ->
     time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/RD8fp5e.png?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
+  robot.hear /stuck/gim, (res) ->
+#    res.send "https://i.imgur.com/RD8fp5e.png"
+    time = new Date
+    robot.adapter.client.web.chat.postMessage(res.message.room, "hhttps://i.imgur.com/BLnJWJ0.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+
 #  robot.hear /!wink/gim, (res) ->
 #    res.send "https://i.imgur.com/cuoeN6C.gif"
 
