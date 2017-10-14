@@ -39,7 +39,8 @@ module.exports = (robot) ->
     res.send "#{pepto}?  What does that even mean?\n > Uhhhhhhhhhhhhh..... Upset."
 
   robot.hear /!wink/gim, (res) ->
-    res.send "https://i.imgur.com/RD8fp5e.png"
+#    res.send "https://i.imgur.com/RD8fp5e.png"
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/RD8fp5e.png", {as_user: true, unfurl_links: true})
 
 #  robot.hear /!wink/gim, (res) ->
 #    res.send "https://i.imgur.com/cuoeN6C.gif"
