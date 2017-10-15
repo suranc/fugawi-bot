@@ -55,34 +55,19 @@ module.exports = (robot) ->
 
   robot.hear /mmenu/gim, (res) ->
     robot.http("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1").get() (err, response, body) ->
-      monday = "<h1>Monday</h1>.*<?xml version=\"1.0\" encoding=\"utf-16\"?>.*\n"
-      # pattern = ///
-      #   ^\(?(\d{3})\)? # Capture area code, ignore optional parens
-      #   [-\s]?(\d{3})  # Capture prefix, ignore optional dash or space
-      #   -?(\d{4})      # Capture line-number, ignore optional dash
-      # ///
-      # [area_code, prefix, line] = "(555)123-4567".match(pattern)[1..3]
       pattern = ///
-    #    <h1>Monday</h1>
-    #    \s+
         (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
-#        .*
-#        (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
-#        .*
-#        (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
-#        .*
-#        (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
-#        .*
-#        (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
-#        (.+)
-#      ^  (<\?xml\x20version=\"1.0\"\x20encoding=\"utf-16\"\?>)
-#        (guest\s+Restaurant:\s+[^<]+.*)
-#        (Guest\s+Restaurant:\s+[^<]+).*
-#        (Guest\s+Restaurant:\s+[^<]+).*
-#        (Guest\s+Restaurant:\s+[^<]+)
       ///gmi
-      mondaytext = body.match(pattern)#[1]#[0]#[3]
-      console.dir mondaytext[5]
+      xmltext = body.match(pattern)
+      monday = xmltext[1]
+      tuesday = xmltext[2]
+      wednesday = xmltext[3]
+      thursday = xmltext[4]
+      friday = xmltext[5]
+
+      guestpattern = ///
+        (Guest Resturant [^<]+)
+      ///gmi
       # => ['555', '123', '4567']
       #result = monday.exec(body)
       #console.log result
