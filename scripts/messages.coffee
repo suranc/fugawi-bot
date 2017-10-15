@@ -1,6 +1,7 @@
 # Description:
 #   Basic scripts that listen for a prompt and return an associated static message
 
+time = new Date
 
 module.exports = (robot) ->
 
@@ -54,6 +55,9 @@ module.exports = (robot) ->
   robot.hear /fast/gim, (res) ->
     time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/xN2P433.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+
+  robot.hear /kha+n/gim, (res) ->
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/SEaiRlG.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
 #  robot.hear /!wink/gim, (res) ->
 #    res.send "https://i.imgur.com/cuoeN6C.gif"
