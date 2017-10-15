@@ -68,6 +68,9 @@ module.exports = (robot) ->
       guestpattern = ///
         (Guest Resturant [^<]+)
       ///gmi
+      guestmatch = monday.match(guestpattern)
+      #res.send guestmatch[1]
+      res.send monday
       # => ['555', '123', '4567']
       #result = monday.exec(body)
       #console.log result
