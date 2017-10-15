@@ -40,6 +40,10 @@ module.exports = (robot) ->
   robot.hear /kha+n/gim, (res) ->
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/SEaiRlG.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
+  robot.hear /richardson/gim, (res) ->
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/fPqnkvC.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+
+
   robot.hear /mmenu/gim, (res) ->
     robot.http("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1").get() (err, response, body) ->
       monday = "<h1>Monday</h1>.*<?xml version=\"1.0\" encoding=\"utf-16\"?>.*\n"
@@ -60,7 +64,7 @@ module.exports = (robot) ->
         (Guest\s+Restaurant:\s+[^<]+).*
         (Guest\s+Restaurant:\s+[^<]+).*
         (Guest\s+Restaurant:\s+[^<]+)
-      ///#gm
+      ///gm
       mondaytext = body.match(pattern)#[1]#[0]#[3]
       console.dir mondaytext[3]
       # => ['555', '123', '4567']
