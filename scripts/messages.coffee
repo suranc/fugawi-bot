@@ -1,24 +1,10 @@
 # Description:
 #   Basic scripts that listen for a prompt and return an associated static message
 
+# Date object for getting current time
 time = new Date
 
 module.exports = (robot) ->
-
-  robot.respond /universe/gim, (res) ->
-    res.send "> GitHub is great, and Training Day is greater!!"
-
-  robot.respond /USERNAME/gim, (res) ->
-    res.send " > That person is awesome"
-
-  robot.respond /fruit/gim, (res) ->
-    res.send " > My favorites are apples and grapes."
-
-  robot.respond /movie/gim, (res) ->
-    res.send " > My favorite movie is The Wizard of Oz"
-
-  robot.respond /lunch/gim, (res) ->
-    res.send " > I want a peanut butter and jelly sandwich for lunch today."
 
   robot.hear /open the/gim, (res) ->
     res.send " > I'm sorry, Dave. I'm afraid I can't do that."
@@ -40,25 +26,51 @@ module.exports = (robot) ->
     res.send "#{pepto}?  What does that even mean?\n > Uhhhhhhhhhhhhh..... Upset."
 
   robot.hear /!wink/gim, (res) ->
-#    res.send "https://i.imgur.com/RD8fp5e.png"
-    time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/RD8fp5e.png?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
   robot.hear /stuck/gim, (res) ->
-    time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "hhttps://i.imgur.com/BLnJWJ0.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
   robot.hear /matt/gim, (res) ->
-    time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/OCUDGLX.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
   robot.hear /fast/gim, (res) ->
-    time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/xN2P433.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
   robot.hear /kha+n/gim, (res) ->
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/SEaiRlG.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
-#  robot.hear /!wink/gim, (res) ->
-#    res.send "https://i.imgur.com/cuoeN6C.gif"
+  robot.hear /mmenu/gim, (res) ->
+    robot.http("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1").get() (err, response, body) ->
+      monday = "<h1>Monday</h1>.*<?xml version=\"1.0\" encoding=\"utf-16\"?>.*\n"
+      # pattern = ///
+      #   ^\(?(\d{3})\)? # Capture area code, ignore optional parens
+      #   [-\s]?(\d{3})  # Capture prefix, ignore optional dash or space
+      #   -?(\d{4})      # Capture line-number, ignore optional dash
+      # ///
+      # [area_code, prefix, line] = "(555)123-4567".match(pattern)[1..3]
+      pattern = ///
+    #    <h1>Monday</h1>
+    #    \s+
+        (<\?xml\x20version=\"1.0\"\x20encoding=\"utf-16\"\?>)
+        (.+)
+#      ^  (<\?xml\x20version=\"1.0\"\x20encoding=\"utf-16\"\?>)
+      ///
+      mondaytext = body.match(pattern)[2]#[0]#[3]
+      console.dir mondaytext
+      # => ['555', '123', '4567']
+      #result = monday.exec(body)
+      #console.log result
 
+      #res.send "response = #{response}\nbody = #{body}"
+##      {parseString} = require 'xml2js'
+##      xml = body #"#{body}"
+##      parseString xml, (err2, result) ->
+        #res.send result
+        #res.send xml
+##        console.dir result
+        #console.dir body
+#      {parseString} = require 'xml2js'
+#      xml = "<root>Hello xml2js!</root>"
+#      parseString xml, (err2, result) ->
+#          console.dir response.res

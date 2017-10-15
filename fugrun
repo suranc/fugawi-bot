@@ -1,0 +1,6 @@
+#!/bin/bash
+
+. fugconfig
+
+kill $(ps uax|grep fugawi-bot|grep -v grep|awk '{print $2}')
+npm start&

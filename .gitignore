@@ -1,0 +1,5 @@
+node_modules
+testfiles/
+.vscode
+package-lock.json
+fugconfig
