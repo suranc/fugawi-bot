@@ -1,9 +1,6 @@
 # Description:
 #   Basic scripts that listen for a prompt and return an associated static message
 
-# Date object for getting current time
-time = new Date
-
 module.exports = (robot) ->
 
   robot.hear /open the/gim, (res) ->
@@ -26,21 +23,33 @@ module.exports = (robot) ->
     res.send "#{pepto}?  What does that even mean?\n > Uhhhhhhhhhhhhh..... Upset."
 
   robot.hear /!wink/gim, (res) ->
+    # Date object for getting current time
+    time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/RD8fp5e.png?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
   robot.hear /stuck/gim, (res) ->
+    # Date object for getting current time
+    time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "hhttps://i.imgur.com/BLnJWJ0.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
   robot.hear /matt/gim, (res) ->
+    # Date object for getting current time
+    time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/OCUDGLX.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
   robot.hear /fast/gim, (res) ->
+    # Date object for getting current time
+    time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/xN2P433.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
   robot.hear /kha+n/gim, (res) ->
+    # Date object for getting current time
+    time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/SEaiRlG.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
   robot.hear /richardson/gim, (res) ->
+    # Date object for getting current time
+    time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/fPqnkvC.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
 
@@ -56,15 +65,22 @@ module.exports = (robot) ->
       pattern = ///
     #    <h1>Monday</h1>
     #    \s+
-#        (<\?xml\x20version=\"1.0\"\x20encoding=\"utf-16\"\?>)
-#        (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>)
+#        (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
+#        .*
+#        (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
+#        .*
+#        (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
+#        .*
+#        (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
+#        .*
+#        (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
 #        (.+)
 #      ^  (<\?xml\x20version=\"1.0\"\x20encoding=\"utf-16\"\?>)
-        (Guest\s+Restaurant:\s+[^<]+).*
-        (Guest\s+Restaurant:\s+[^<]+).*
-        (Guest\s+Restaurant:\s+[^<]+).*
-        (Guest\s+Restaurant:\s+[^<]+)
-      ///gm
+        (guest\s+Restaurant:\s+[^<]+.*)
+#        (Guest\s+Restaurant:\s+[^<]+).*
+#        (Guest\s+Restaurant:\s+[^<]+).*
+#        (Guest\s+Restaurant:\s+[^<]+)
+      ///gmi
       mondaytext = body.match(pattern)#[1]#[0]#[3]
       console.dir mondaytext[3]
       # => ['555', '123', '4567']
