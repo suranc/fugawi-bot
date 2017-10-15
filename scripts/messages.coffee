@@ -65,7 +65,7 @@ module.exports = (robot) ->
       pattern = ///
     #    <h1>Monday</h1>
     #    \s+
-#        (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
+        (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
 #        .*
 #        (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
 #        .*
@@ -76,13 +76,13 @@ module.exports = (robot) ->
 #        (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
 #        (.+)
 #      ^  (<\?xml\x20version=\"1.0\"\x20encoding=\"utf-16\"\?>)
-        (guest\s+Restaurant:\s+[^<]+.*)
+#        (guest\s+Restaurant:\s+[^<]+.*)
 #        (Guest\s+Restaurant:\s+[^<]+).*
 #        (Guest\s+Restaurant:\s+[^<]+).*
 #        (Guest\s+Restaurant:\s+[^<]+)
       ///gmi
       mondaytext = body.match(pattern)#[1]#[0]#[3]
-      console.dir mondaytext[3]
+      console.dir mondaytext[5]
       # => ['555', '123', '4567']
       #result = monday.exec(body)
       #console.log result
