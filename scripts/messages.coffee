@@ -80,11 +80,9 @@ module.exports = (robot) ->
       message = message + "\n"
 
     return message
-  
-  c=a+b
-  console.log "Sum of the two numbers is: "+c
 
   robot.hear /mmenu/gim, (res) ->
-    message = "Plaza 1 Guest Resturants:\n" + parse_aramark_url("")
-    
-      res.send message
+    p1 = "Plaza 1 Guest Resturants:\n" + parse_aramark_url("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1")
+    res.send p1
+    #p1 = "Plaza 1 Guest Resturants:\n" + parse_aramark_url("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1")
+    #res.send p1
