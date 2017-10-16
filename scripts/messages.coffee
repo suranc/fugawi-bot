@@ -96,20 +96,21 @@ module.exports = (robot) ->
       split_data2[4] = split_data[4]
 
 
-      for numa in [0...5]
-        console.log "NUMBA " + numa
-        console.log split_data2[numa]
+      # for numa in [0...5]
+      #   console.log "NUMBA " + numa
+      #   console.log split_data2[numa]
 
       for day in [0...5]# by 1
         guestpattern = ///
-          (<div\sclass=\"noNutritionalLink\">[^<\n]+)#[A-Za-z\s\.]+)
-        ///
+          (<div\sclass=\"noNutritionalLink\">[A-Za-z\s\.]+)
+        ///gmi
         guestmatch = split_data2[day].match(guestpattern)
         message = message + " >  " + days[day] + ":"
         try
           firstrun = true
           for i in guestmatch
-            restaurantname = i.match(/(<div\sclass=\"noNutritionalLink\">)\s*([^<\n]+)/)[2]
+            console.log i
+            restaurantname = i.match(/(<div\sclass=\"noNutritionalLink\">)\s*([^<\n\r]+)[\s\r\n]*/)[2]
             if firstrun != true
               message = message + ", " + restaurantname
             else
