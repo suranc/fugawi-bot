@@ -55,10 +55,7 @@ module.exports = (robot) ->
 
   send_aramark_guests =(url, intro, res) -> #, callback) ->
     robot.http(url).get() (err, response, body) ->
-      #console.log "before message set to empty string"
       message = "" + intro
-      #console.log "after message set to empty string"
-      #message = ""
       pattern = ///
         (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
       ///gmi
@@ -81,46 +78,11 @@ module.exports = (robot) ->
               message = message + " " + restaurantname
               firstrun = false
         message = message + "\n"
-      #   console.log message
-      # console.log "before callback, printing message below ----V"
-      # console.log message
-      # callback message
-      # console.log "after callback"
       res.send message
-    #  message = message + ""
 
   callback = (message) ->
     message
 
   robot.hear /mmenu/gim, (res) ->
-#    p1response = parse_aramark_url("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1")
-#    p1response.then (p1) ->
-#      res.send "Plaza 1 Guest Resturants:\n#{p1}"
-    #res.send p1
-    #p1 = "Plaza 1 Guest Resturants:\n" + parse_aramark_url("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1")
-    #res.send p1
-
-    # console.log "Before parse func"
-    # p1message = ""
-    # parse_aramark_url "http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1", (p1) -> p1message = p1
-    # console.log "After parse func"
-
     send_aramark_guests("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1", "Plaza 1: \n", res)
     send_aramark_guests("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3743&pageid=20&stationID=-1", "Plaza 3: \n", res)
-
-# userInfo = 
-#   id: user.id
-#   email: user.email
-# getCars user.id, (cars) ->
-#   userInfo.cars = cars
-
-# userInfo = {
-#         id: user.id,
-#         email: user.email,
-#         cars: getCars(user.id),
-#       }
-
-#       getCars = (userId, callback) ->
-
-    #res.send JSON.stringify(p1)
-    #res.send p1message
