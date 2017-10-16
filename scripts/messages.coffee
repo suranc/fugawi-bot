@@ -83,48 +83,27 @@ module.exports = (robot) ->
   send_aramark_guests2 =(url, intro, res) ->
     robot.http(url).get() (err, response, body) ->
       message = "" + intro
-      pattern = ///
-        #(<div\sid.*foodMenuDayColumn\">)
-        (foodMenuDayColumn.*foodMenuDayColumn)
-        #(<div\sid=\"[a-z]+Column\"\sclass=\"foodMenuDayColumn\">.*<div\sid=\"[a-z]+Column\"\sclass=\"foodMenuDayColumn\">)
-#        .*
-#        (<div\sid="[a-z]+Column"\sclass="foodMenuDayColumn">.*<div\sid="[a-z]+Column"\sclass="foodMenuDayColumn">)
-#        (<div\sid="[a-z]+Column"\sclass="foodMenuDayColumn">.*+<div\sid="[a-z]+Column"\sclass="foodMenuDayColumn">)
-#        (<div\sid="[a-z]+Column"\sclass="foodMenuDayColumn">.*+<div\sid="[a-z]+Column"\sclass="foodMenuDayColumn">)
-#        (<div\sid="[a-z]+Column"\sclass="foodMenuDayColumn">.*+<div\sclass="footer">)
-      ///gmi
-      #console.log body
-      #xmltext = body.match(pattern)
-      #splitted = body.split("foodMenuDayColumn")
-      splitted = body.split('Column" class="foodMenuDayColumn">')
+      split_data = body.split('Column" class="foodMenuDayColumn">')
       days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 
-      #res.send splitted[1]
 
-      guestpattern = ///
-        (<div\sclass=\"noNutritionalLink\">[A-Za-z\s]+)
-      ///
-#)(</div>|<br>))
-      testmatch = splitted[1].match(guestpattern)
-      res.send testmatch[1]
-
-      # for day in [0...5] by 1
-      #   guestpattern = ///
-      #     (Guest\s+Restaurant:?\s*[^<]+)
-      #   ///gmi
-      #   guestmatch = xmltext[day].match(guestpattern)
-      #   message = message + " >  " + days[day] + ":"
-      #   try
-      #     firstrun = true
-      #     for i in guestmatch
-      #       restaurantname = i.match(/(Guest\s+Restaurant:?\s*)([^<]+)\s*/)[2]
-      #       if firstrun != true
-      #         message = message + ", " + restaurantname
-      #       else
-      #         message = message + " " + restaurantname
-      #         firstrun = false
-      #   message = message + "\n"
-      # res.send message
+      for day in [1...5]# by 1
+        guestpattern = ///
+          (<div\sclass=\"noNutritionalLink\">[A-Za-z\s]+)
+        ///
+        guestmatch = split_data[day].match(guestpattern)
+        message = message + " >  " + days[day] + ":"
+        try
+          firstrun = true
+          for i in guestmatch
+            restaurantname = i.match(/(<div\sclass=\"noNutritionalLink\">)\s*([A-Za-z\s]+)\s*/)[2]
+            if firstrun != true
+              message = message + ", " + restaurantname
+            else
+              message = message + " " + restaurantname
+              firstrun = false
+        message = message + "\n"
+      res.send message
 
   robot.hear /mmenu/gim, (res) ->
     #send_aramark_guests("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1", "Plaza 1: \n", res)
