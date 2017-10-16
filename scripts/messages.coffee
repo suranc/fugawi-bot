@@ -115,6 +115,6 @@ module.exports = (robot) ->
       res.send message
 
 
-  robot.hear /mmenu/gim, (res) ->
+  robot.hear /!guest/gim, (res) ->
     send_aramark_guests_p1("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1", "Plaza 1: \n", res)
     send_aramark_guests_p3("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3743&pageid=20&menuid=10510&stationID=1723", "Plaza 3: \n", res)
