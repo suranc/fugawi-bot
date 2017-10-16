@@ -59,11 +59,6 @@ module.exports = (robot) ->
         (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
       ///gmi
       xmltext = body.match(pattern)
-#      monday = xmltext[0]
-#      tuesday = xmltext[1]
-#      wednesday = xmltext[2]
-#      thursday = xmltext[3]
-#      friday = xmltext[4]
       days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
       message = "Plaza 1 Guest Resturants:\n"
 
@@ -72,28 +67,16 @@ module.exports = (robot) ->
           (Guest\s+Restaurant:?\s*[^<]+)
         ///gmi
         guestmatch = xmltext[day].match(guestpattern)
-        message = message + " " + days[day] + day+":"
+        message = message + " >  " + days[day] + ":"
         try
+          firstrun = true
           for i in guestmatch
-            message = message + " " + i
-            #res.send days[day] + "match: " + i + "\n"
+            restaurantname = i.match(/(Guest\s+Restaurant:?\s*)([^<]+)\s*/)[2]
+            if firstrun != true
+              message = message + ", " + restaurantname
+            else
+              message = message + " " + restaurantname
+              firstrun = false
+        message = message + "\n"
         
       res.send message
-      #res.send guestmatch[0]
-      #res.send monday
-      # => ['555', '123', '4567']
-      #result = monday.exec(body)
-      #console.log result
-
-      #res.send "response = #{response}\nbody = #{body}"
-##      {parseString} = require 'xml2js'
-##      xml = body #"#{body}"
-##      parseString xml, (err2, result) ->
-        #res.send result
-        #res.send xml
-##        console.dir result
-        #console.dir body
-#      {parseString} = require 'xml2js'
-#      xml = "<root>Hello xml2js!</root>"
-#      parseString xml, (err2, result) ->
-#          console.dir response.res
