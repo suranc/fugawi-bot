@@ -59,17 +59,27 @@ module.exports = (robot) ->
         (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
       ///gmi
       xmltext = body.match(pattern)
-      monday = xmltext[0]
-      tuesday = xmltext[1]
-      wednesday = xmltext[2]
-      thursday = xmltext[3]
-      friday = xmltext[4]
+#      monday = xmltext[0]
+#      tuesday = xmltext[1]
+#      wednesday = xmltext[2]
+#      thursday = xmltext[3]
+#      friday = xmltext[4]
+      days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      message = "Plaza 1 Guest Resturants:\n"
 
-      guestpattern = ///
-        (Guest\s+Restaurant:\s+[^<]+)
-      ///gmi
-      guestmatch = friday.match(guestpattern)
-      res.send guestmatch[0]
+      for day in [0...5] by 1
+        guestpattern = ///
+          (Guest\s+Restaurant:?\s*[^<]+)
+        ///gmi
+        guestmatch = xmltext[day].match(guestpattern)
+        message = message + " " + days[day] + day+":"
+        try
+          for i in guestmatch
+            message = message + " " + i
+            #res.send days[day] + "match: " + i + "\n"
+        
+      res.send message
+      #res.send guestmatch[0]
       #res.send monday
       # => ['555', '123', '4567']
       #result = monday.exec(body)
