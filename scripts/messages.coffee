@@ -86,12 +86,25 @@ module.exports = (robot) ->
       split_data = body.split('Column" class="foodMenuDayColumn">')
       days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 
+      # Easy workaround to accomidate aramark's bullshit
+      split_data_temp = split_data[1].split('Column"  class="foodMenuDayColumn">')
+      split_data2 = []
+      split_data2[0] = split_data_temp[0]
+      split_data2[1] = split_data_temp[1]
+      split_data2[2] = split_data[2]
+      split_data2[3] = split_data[3]
+      split_data2[4] = split_data[4]
 
-      for day in [1...5]# by 1
+
+      for numa in [0...5]
+        console.log "NUMBA " + numa
+        console.log split_data2[numa]
+
+      for day in [0...5]# by 1
         guestpattern = ///
-          (<div\sclass=\"noNutritionalLink\">[A-Za-z\s]+)
+          (<div\sclass=\"noNutritionalLink\">[^<\n]+)#[A-Za-z\s\.]+)
         ///
-        guestmatch = split_data[day].match(guestpattern)
+        guestmatch = split_data2[day].match(guestpattern)
         message = message + " >  " + days[day] + ":"
         try
           firstrun = true
