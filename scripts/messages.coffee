@@ -53,7 +53,7 @@ module.exports = (robot) ->
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/fPqnkvC.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
 
-  send_aramark_guests =(url, intro, res) ->
+  send_aramark_guests_p1 =(url, intro, res) ->
     robot.http(url).get() (err, response, body) ->
       message = "" + intro
       pattern = ///
@@ -80,7 +80,8 @@ module.exports = (robot) ->
         message = message + "\n"
       res.send message
 
-  send_aramark_guests2 =(url, intro, res) ->
+
+  send_aramark_guests_p3 =(url, intro, res) ->
     robot.http(url).get() (err, response, body) ->
       message = "" + intro
       split_data = body.split('Column" class="foodMenuDayColumn">')
@@ -94,11 +95,6 @@ module.exports = (robot) ->
       split_data2[2] = split_data[2]
       split_data2[3] = split_data[3]
       split_data2[4] = split_data[4]
-
-
-      # for numa in [0...5]
-      #   console.log "NUMBA " + numa
-      #   console.log split_data2[numa]
 
       for day in [0...5]# by 1
         guestpattern = ///
@@ -119,7 +115,7 @@ module.exports = (robot) ->
         message = message + "\n"
       res.send message
 
+
   robot.hear /mmenu/gim, (res) ->
-    #send_aramark_guests("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1", "Plaza 1: \n", res)
-    #send_aramark_guests2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3743&pageid=20&stationID=-1", "Plaza 3: \n", res)
-    send_aramark_guests2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3743&pageid=20&menuid=10510&stationID=1723", "Plaza 3: \n", res)
+    send_aramark_guests_p1("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1", "Plaza 1: \n", res)
+    send_aramark_guests_p3("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3743&pageid=20&menuid=10510&stationID=1723", "Plaza 3: \n", res)
