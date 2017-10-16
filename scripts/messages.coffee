@@ -53,30 +53,38 @@ module.exports = (robot) ->
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/fPqnkvC.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
 
-  robot.hear /mmenu/gim, (res) ->
-    robot.http("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1").get() (err, response, body) ->
-      pattern = ///
-        (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
-      ///gmi
-      xmltext = body.match(pattern)
-      days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-      message = "Plaza 1 Guest Resturants:\n"
+  parse_aramark_url =(url) ->
+    robot.http(url).get() (err, response, body) ->
+    pattern = ///
+      (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
+    ///gmi
+    xmltext = body.match(pattern)
+    days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    message = "Plaza 1 Guest Resturants:\n"
 
-      for day in [0...5] by 1
-        guestpattern = ///
-          (Guest\s+Restaurant:?\s*[^<]+)
-        ///gmi
-        guestmatch = xmltext[day].match(guestpattern)
-        message = message + " >  " + days[day] + ":"
-        try
-          firstrun = true
-          for i in guestmatch
-            restaurantname = i.match(/(Guest\s+Restaurant:?\s*)([^<]+)\s*/)[2]
-            if firstrun != true
-              message = message + ", " + restaurantname
-            else
-              message = message + " " + restaurantname
-              firstrun = false
-        message = message + "\n"
-        
+    for day in [0...5] by 1
+      guestpattern = ///
+        (Guest\s+Restaurant:?\s*[^<]+)
+      ///gmi
+      guestmatch = xmltext[day].match(guestpattern)
+      message = message + " >  " + days[day] + ":"
+      try
+        firstrun = true
+        for i in guestmatch
+          restaurantname = i.match(/(Guest\s+Restaurant:?\s*)([^<]+)\s*/)[2]
+          if firstrun != true
+            message = message + ", " + restaurantname
+          else
+            message = message + " " + restaurantname
+            firstrun = false
+      message = message + "\n"
+
+    return message
+  
+  c=a+b
+  console.log "Sum of the two numbers is: "+c
+
+  robot.hear /mmenu/gim, (res) ->
+    message = "Plaza 1 Guest Resturants:\n" + parse_aramark_url("")
+    
       res.send message
