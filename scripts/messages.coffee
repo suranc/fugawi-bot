@@ -105,7 +105,6 @@ module.exports = (robot) ->
         try
           firstrun = true
           for i in guestmatch
-            console.log i
             restaurantname = i.match(/(<div\sclass=\"noNutritionalLink\">)\s*([^<\n\r]+)[\s\r\n]*/)[2]
             if firstrun != true
               message = message + ", " + restaurantname
