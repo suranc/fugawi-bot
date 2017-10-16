@@ -53,7 +53,7 @@ module.exports = (robot) ->
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/fPqnkvC.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
 
-  send_aramark_guests =(url, intro, res) -> #, callback) ->
+  send_aramark_guests =(url, intro, res) ->
     robot.http(url).get() (err, response, body) ->
       message = "" + intro
       pattern = ///
@@ -79,9 +79,6 @@ module.exports = (robot) ->
               firstrun = false
         message = message + "\n"
       res.send message
-
-  callback = (message) ->
-    message
 
   robot.hear /mmenu/gim, (res) ->
     send_aramark_guests("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1", "Plaza 1: \n", res)
