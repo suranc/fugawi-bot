@@ -53,7 +53,7 @@ module.exports = (robot) ->
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/fPqnkvC.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
 
-  send_aramark_guests_p1 =(url, intro, res) ->
+  send_aramark_guests_style1 =(url, intro, res) ->
     robot.http(url).get() (err, response, body) ->
       message = "" + intro
       pattern = ///
@@ -81,7 +81,7 @@ module.exports = (robot) ->
       res.send message
 
 
-  send_aramark_guests_p3 =(url, intro, res) ->
+  send_aramark_guests_style2 =(url, intro, res) ->
     robot.http(url).get() (err, response, body) ->
       message = "" + intro
       split_data = body.split('Column" class="foodMenuDayColumn">')
@@ -116,5 +116,7 @@ module.exports = (robot) ->
 
 
   robot.hear /!guest/gim, (res) ->
-    send_aramark_guests_p1("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1", "Plaza 1: \n", res)
-    send_aramark_guests_p3("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3743&pageid=20&menuid=10510&stationID=1723", "Plaza 3: \n", res)
+    send_aramark_guests_style1("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1", "Plaza 1: \n", res)
+    send_aramark_guests_style2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3743&pageid=20&menuid=10510&stationID=1723", "Plaza 3: \n", res)
+    send_aramark_guests_style2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4510&pageid=20&menuid=16544&stationID=1938", "Front Street: \n", res)
+    send_aramark_guests_style2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3887&pageid=20&menuid=11454&stationID=1721", "280 West: \n", res)
