@@ -55,6 +55,10 @@ module.exports = (robot) ->
   robot.hear /son/gim, (res) ->
     res.send " > If you were my son, I'd throw you through that fuckin' wall!"    
 
+  robot.hear /(gorn|woody)/gim, (res) ->
+    # Date object for getting current time
+    time = new Date
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/zpvDLt9.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
   send_aramark_guests_style1 =(url, intro, res) ->
     robot.http(url).get() (err, response, body) ->
