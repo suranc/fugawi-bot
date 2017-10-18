@@ -51,7 +51,12 @@ module.exports = (robot) ->
     # Date object for getting current time
     time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/fPqnkvC.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
-  
+ 
+  robot.hear /Canty/gim, (res) ->
+    # Date object for getting current time
+    time = new Date
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://files.slack.com/files-pri/T5ATY1HFS-F7L7LQC2Z/cant.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})    
+    
   robot.hear /son/gim, (res) ->
     res.send " > If you were my son, I'd throw you through that fuckin' wall!"    
 
