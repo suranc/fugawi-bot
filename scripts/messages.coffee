@@ -51,9 +51,16 @@ module.exports = (robot) ->
     # Date object for getting current time
     time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/fPqnkvC.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+
+  # Tech Sergeant Richardsonify
+  robot.hear /^\s*(!tsr)(.*)/i, (res) ->
+    # Date object for getting current time
+    time = new Date
+    res.send "> UHHHHHHHHhhhhhhhhhhh... " + res.match[2]
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/fPqnkvC.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
   
   robot.hear /son/gim, (res) ->
-    res.send " > If you were my son, I'd throw you through that fuckin' wall!"    
+    res.send " > If you were my son, I'd throw you through that fuckin' wall!"
 
   robot.hear /(go+r+n|woody)/gim, (res) ->
     # Date object for getting current time
