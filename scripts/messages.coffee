@@ -59,7 +59,7 @@ module.exports = (robot) ->
     res.send "> UHHHHHHHHhhhhhhhhhhh... " + res.match[2]
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/fPqnkvC.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
   
-  robot.hear /son/gim, (res) ->
+  robot.hear /(^\s*|\s+)son(\s*$|\s+)/gim, (res) ->
     res.send " > If you were my son, I'd throw you through that fuckin' wall!"
 
   robot.hear /(go+r+n|woody)/gim, (res) ->
