@@ -58,6 +58,10 @@ module.exports = (robot) ->
     time = new Date
     res.send "> UHHHHHHHHhhhhhhhhhhh... " + res.match[2]
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/fPqnkvC.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+
+  # You're The Richardson Now Dawg
+  robot.hear /^\s*(!ytrnd)\s*([^|]+)\|(.*)/i, (res) ->
+    res.send "http://ec2-52-14-242-174.us-east-2.compute.amazonaws.com:3000/?" + "line1=" + encodeURIComponent(res.match[2]) + "&line2=" + encodeURIComponent(res.match[3])
   
   robot.hear /(^\s*|\s+)son(\s*$|\s+)/gim, (res) ->
     res.send " > If you were my son, I'd throw you through that fuckin' wall!"
