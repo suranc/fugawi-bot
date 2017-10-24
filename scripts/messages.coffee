@@ -74,22 +74,24 @@ module.exports = (robot) ->
   send_aramark_guests_style1 =(url, intro, res) ->
     robot.http(url).get() (err, response, body) ->
       message = "" + intro
-      pattern = ///
-        (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
-      ///gmi
-      xmltext = body.match(pattern)
-      days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 
-      for day in [0...5] by 1
+      # Remove line breaks, since aramark decides to put those between "Guest Resturant:" and the name
+      xmltext = body.replace(/<br>/gi, "");
+
+      # Add ghost day since our string matches array is off by one (could just shift instead)
+      days = ["Ghostday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      xmlarray = xmltext.split('<?xml version="1.0" encoding="utf-16"?>')
+
+      for day in [1...6] by 1
         guestpattern = ///
           (Guest\s+Restaurant:?\s*[^<]+)
         ///gmi
-        guestmatch = xmltext[day].match(guestpattern)
+        guestmatch = xmlarray[day].match(guestpattern)
         message = message + " >  " + days[day] + ":"
         try
           firstrun = true
           for i in guestmatch
-            restaurantname = i.match(/(Guest\s+Restaurant:?\s*)([^<]+)\s*/)[2]
+            restaurantname = i.match(/(Guest\s+Restaurant:?\s*)([^<]+)\s*/)[2].replace(/\s+/g, " ") # Run regex to get guest resturant name on current match, and access second element (the resturant name itself).  Finally, we need to replace multiple occurences of whitespace with a space (primarily to nuke newlines)
             if firstrun != true
               message = message + ", " + restaurantname
             else
@@ -123,7 +125,8 @@ module.exports = (robot) ->
         try
           firstrun = true
           for i in guestmatch
-            restaurantname = i.match(/(<div\sclass=\"noNutritionalLink\">)\s*([^<\n\r]+)[\s\r\n]*/)[2]
+            stripguest = i.replace(/\s*Guest\s*Restaurant:?\s*/gi, ""); # Strip off any occurences of Guest Restaurant
+            restaurantname = stripguest.match(/(<div\sclass=\"noNutritionalLink\">)\s*([^<\n\r]+)[\s\r\n]*/)[2];
             if firstrun != true
               message = message + ", " + restaurantname
             else
