@@ -118,7 +118,7 @@ module.exports = (robot) ->
 
       for day in [0...5]# by 1
         guestpattern = ///
-          (<div\sclass=\"noNutritionalLink\">[A-Za-z\s\.]+)
+          (<div\sclass=\"noNutritionalLink\">[^<]+)
         ///gmi
         guestmatch = split_data2[day].match(guestpattern)
         message = message + " >  " + days[day] + ":"
@@ -126,7 +126,7 @@ module.exports = (robot) ->
           firstrun = true
           for i in guestmatch
             stripguest = i.replace(/\s*Guest\s*Restaurant:?\s*/gi, ""); # Strip off any occurences of Guest Restaurant
-            restaurantname = stripguest.match(/(<div\sclass=\"noNutritionalLink\">)\s*([^<\n\r]+)[\s\r\n]*/)[2];
+            restaurantname = stripguest.match(/(<div\sclass=\"noNutritionalLink\">)\s*([^<\n\r]+)[\s]*/)[2];
             if firstrun != true
               message = message + ", " + restaurantname
             else
