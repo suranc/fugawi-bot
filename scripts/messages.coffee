@@ -143,4 +143,5 @@ module.exports = (robot) ->
     send_aramark_guests_style2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3887&pageid=20&menuid=11454&stationID=1721", "Plaza 2: \n", res)
     send_aramark_guests_style1("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3971&pageid=20&stationID=-1", "10 West: \n", res)
     send_aramark_guests_style2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3746&pageid=20&stationID=1751", "Marconi: \n", res)
+    send_aramark_guests_style1("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3748&pageid=20&stationID=-1", "Tuttle: \n", res)
     
