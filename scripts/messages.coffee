@@ -65,6 +65,10 @@ module.exports = (robot) ->
     res.send "> UHHHHHHHHhhhhhhhhhhh... " + res.match[2]
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/fPqnkvC.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
+  # You're The Lumberg Now Dawg
+  robot.hear /^\s*(!ytlnd)\s*(.*)/i, (res) ->
+    res.send "http://ec2-52-14-242-174.us-east-2.compute.amazonaws.com:8080/?" + "line=" + encodeURIComponent(res.match[2])
+
   # You're The Richardson Now Dawg
   robot.hear /^\s*(!ytrnd)\s*([^|]+)\|(.*)/i, (res) ->
     res.send "http://ec2-52-14-242-174.us-east-2.compute.amazonaws.com:3000/?" + "line1=" + encodeURIComponent(res.match[2]) + "&line2=" + encodeURIComponent(res.match[3])
