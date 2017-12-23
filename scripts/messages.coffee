@@ -76,6 +76,11 @@ module.exports = (robot) ->
   robot.hear /(^\s*|\s+)son(\s*$|\s+)/gim, (res) ->
     res.send " > If you were my son, I'd throw you through that fuckin' wall!"
 
+  robot.hear /great( *)job/gim, (res) ->
+    # Date object for getting current time
+    time = new Date
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/bhrYwFD.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+
   robot.hear /(go+r+n|woody)/gim, (res) ->
     # Date object for getting current time
     time = new Date
