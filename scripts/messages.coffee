@@ -165,3 +165,54 @@ module.exports = (robot) ->
     send_aramark_guests_style2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3746&pageid=20&stationID=1751", "Marconi: \n", res)
     send_aramark_guests_style1("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3748&pageid=20&stationID=-1", "Tuttle: \n", res)
     
+
+  send_planes_in_air =(planes, res) ->
+    plane_loc_url = "https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json"
+    robot.http(plane_loc_url).get() (err, response, body) ->
+      res.send("------------------BEFORE---------------------")
+      #res.send body
+      dataa = JSON.parse(body)
+      for plane in dataa.acList
+        if plane.Icao in planes
+          res.send(plane.Icao + " is in the air")
+        #res.send(plane.Icao)
+      #res.send(dataa.acList[0].Id)
+      #test1 = body.split("{")
+      #res.send(test1[1])
+      res.send("------------------AFTER---------------------")
+      #s = new Set
+      #s.add {a: 1}
+      #for plane in planes
+      # if "plane3" in planes
+      #   res.send("yes")
+      # else
+      #   res.send("no")
+
+    
+    
+    #res.send("is here")
+    #res.send planes
+    #for plane in planes
+      #res.send plane
+      
+
+    # robot.http(url).get() (err, response, body) ->
+    #   message = "" + intro
+    #   split_data = body.split('Column" class="foodMenuDayColumn">')
+    #   days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+
+    #   # Easy workaround to accomidate aramark's bullshit
+    #   split_data_temp = split_data[1].split('Column"  class="foodMenuDayColumn">')
+    #   split_data2 = []
+    #   split_data2[0] = split_data_temp[0]
+    #   split_data2[1] = split_data_temp[1]
+    #   split_data2[2] = split_data[2]
+    #   split_data2[3] = split_data[3]
+    #   split_data2[4] = split_data[4]
+
+    #   for day in [0...5]# by 1
+    #     guestpattern = ///
+
+  robot.hear /zeplane/gim, (res) ->
+    send_planes_in_air(["A2E566","A70362","A70AD0","A715F5","A719AC","A71D63","A03815","A05216","A11791","A13F10","A1668F","A34B45","A67108","A7C34A","A996CB","A97A71","A9C96F"], res)
+    #send_planes_in_air(["C05EFC","8A0382","3C5467","7812DF","485207","8A03B3","AC52EC","ACC61E","407131","E0820B","AA8740","781172","76CF26","7812EC","A82E29","AA4A90","86CF5A","471F8B","AA9A57","A33A78","A57F50","780A4C","780F49","E80323","899160","A2E566","A70362","A70AD0","A715F5","A719AC","A71D63","A03815","A05216","A11791","A13F10","A1668F","A34B45","A67108","A7C34A","A996CB","A97A71","A9C96F"], res)
