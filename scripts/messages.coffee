@@ -172,8 +172,8 @@ module.exports = (robot) ->
       plane_data = JSON.parse(body)
       for plane in plane_data.acList
         if plane.Reg in planes
-          res.send(plane.Reg + " is in the air")
+          res.send(plane.Reg + " is underway\nLatitude: " + plane.Lat + "\nLongitude: " + plane.Long + "\nModel: " + plane.Mdl + "\nFlight Info: https://flightaware.com/live/flight/" + plane.Reg + "\n\n")
 
   robot.hear /zeplane/gim, (res) ->
-    #send_planes_in_air(["A2E566","A70362","A70AD0","A715F5","A719AC","A71D63","A03815","A05216","A11791","A13F10","A1668F","A34B45","A67108","A7C34A","A996CB","A97A71","A9C96F"], res)
-    send_planes_in_air(["N286MP","N551CP","N553CP","N556CP","N557CP","N558CP","N113HP","N12HP","N17HP","N18HP","N19HP","N311HP","N514HP","N6HP","N717HP","N71HP","N73HP","N781UA"], res)
+    #send_planes_in_air(["N286MP","N551CP","N553CP","N556CP","N557CP","N558CP","N113HP","N12HP","N17HP","N18HP","N19HP","N311HP","N514HP","N6HP","N717HP","N71HP","N73HP","N781UA"], res)
+    send_planes_in_air(["N286MP","N551CP","N553CP","N556CP","N557CP","N558CP","N113HP","N12HP","N17HP","N18HP","N19HP","N311HP","N514HP","N6HP","N717HP","N71HP","N73HP"], res)
