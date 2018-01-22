@@ -171,9 +171,9 @@ module.exports = (robot) ->
     robot.http(plane_loc_url).get() (err, response, body) ->
       plane_data = JSON.parse(body)
       for plane in plane_data.acList
-        if plane.Icao in planes
-          res.send(plane.Icao + " is in the air")
+        if plane.Reg in planes
+          res.send(plane.Reg + " is in the air")
 
   robot.hear /zeplane/gim, (res) ->
-    send_planes_in_air(["A2E566","A70362","A70AD0","A715F5","A719AC","A71D63","A03815","A05216","A11791","A13F10","A1668F","A34B45","A67108","A7C34A","A996CB","A97A71","A9C96F"], res)
-    
+    #send_planes_in_air(["A2E566","A70362","A70AD0","A715F5","A719AC","A71D63","A03815","A05216","A11791","A13F10","A1668F","A34B45","A67108","A7C34A","A996CB","A97A71","A9C96F"], res)
+    send_planes_in_air(["N286MP","N551CP","N553CP","N556CP","N557CP","N558CP","N113HP","N12HP","N17HP","N18HP","N19HP","N311HP","N514HP","N6HP","N717HP","N71HP","N73HP","N781UA"], res)
