@@ -67,11 +67,11 @@ module.exports = (robot) ->
 
   # You're The Lumberg Now Dawg
   robot.hear /^\s*(!ytlnd)\s*(.*)/i, (res) ->
-    res.send "http://the.mangler.club/lumberg/?" + "line=" + encodeURIComponent(res.match[2])
+    res.send "http://lumberg.mangler.club/?" + "line=" + encodeURIComponent(res.match[2])
 
   # You're The Richardson Now Dawg
   robot.hear /^\s*(!ytrnd)\s*([^|]+)\|(.*)/i, (res) ->
-    res.send "http://the.mangler.club/tsr/?" + "line1=" + encodeURIComponent(res.match[2]) + "&line2=" + encodeURIComponent(res.match[3])
+    res.send "http://tsr.mangler.club/?" + "line1=" + encodeURIComponent(res.match[2]) + "&line2=" + encodeURIComponent(res.match[3])
   
   robot.hear /(^\s*|\s+)son(\s*$|\s+)/gim, (res) ->
     res.send " > If you were my son, I'd throw you through that fuckin' wall!"
