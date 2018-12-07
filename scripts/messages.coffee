@@ -42,7 +42,7 @@ module.exports = (robot) ->
     time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/xN2P433.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
-  robot.hear /kha+n/gim, (res) ->
+  robot.hear /kh+a+n+/gim, (res) ->
     # Date object for getting current time
     time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/SEaiRlG.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
@@ -52,26 +52,71 @@ module.exports = (robot) ->
     time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/fPqnkvC.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
+  robot.hear /punchy/gim, (res) ->
+    # Date object for getting current time
+    time = new Date
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/bVt6IN6.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
-  send_aramark_guests =(url, intro, res) ->
+
+  # Tech Sergeant Richardsonify
+  robot.hear /^\s*(!tsr)(.*)/i, (res) ->
+    # Date object for getting current time
+    time = new Date
+    res.send "> UHHHHHHHHhhhhhhhhhhh... " + res.match[2]
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/fPqnkvC.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+
+  # You're The Lumberg Now Dawg
+  robot.hear /^\s*(!ytlnd)\s*(.*)/i, (res) ->
+    res.send "http://lumberg.mangler.club/?" + "line=" + encodeURIComponent(res.match[2])
+
+  # You're The Richardson Now Dawg
+  robot.hear /^\s*(!ytrnd)\s*([^|]+)\|(.*)/i, (res) ->
+    res.send "http://tsr.mangler.club/?" + "line1=" + encodeURIComponent(res.match[2]) + "&line2=" + encodeURIComponent(res.match[3])
+  
+  robot.hear /(^\s*|\s+)son(\s*$|\s+)/gim, (res) ->
+    res.send " > If you were my son, I'd throw you through that fuckin' wall!"
+
+  robot.hear /great( *)job/gim, (res) ->
+    # Date object for getting current time
+    time = new Date
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/bhrYwFD.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+
+  robot.hear /(go+r+n|woody)/gim, (res) ->
+    # Date object for getting current time
+    time = new Date
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/zpvDLt9.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+
+  robot.hear /(wait|hold on)/gim, (res) ->
+    # Date object for getting current time
+    time = new Date
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/16sl1ya.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+
+  robot.hear /MEDIC!/gim, (res) ->
+    # Date object for getting current time
+    time = new Date
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://youtu.be/u8YQEyrbVpE?t=32", {as_user: true, unfurl_media: true})
+
+  send_aramark_guests_style1 =(url, intro, res) ->
     robot.http(url).get() (err, response, body) ->
       message = "" + intro
-      pattern = ///
-        (<\?xml\x20version=\"1.0\"\s+encoding=\"utf-16\"\?>[^\n]+)
-      ///gmi
-      xmltext = body.match(pattern)
-      days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 
-      for day in [0...5] by 1
+      # Remove line breaks, since aramark decides to put those between "Guest Resturant:" and the name
+      xmltext = body.replace(/<br>/gi, "");
+
+      # Add ghost day since our string matches array is off by one (could just shift instead)
+      days = ["Ghostday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+      xmlarray = xmltext.split('<?xml version="1.0" encoding="utf-16"?>')
+
+      for day in [1...6] by 1
         guestpattern = ///
           (Guest\s+Restaurant:?\s*[^<]+)
         ///gmi
-        guestmatch = xmltext[day].match(guestpattern)
+        guestmatch = xmlarray[day].match(guestpattern)
         message = message + " >  " + days[day] + ":"
         try
           firstrun = true
           for i in guestmatch
-            restaurantname = i.match(/(Guest\s+Restaurant:?\s*)([^<]+)\s*/)[2]
+            restaurantname = i.match(/(Guest\s+Restaurant:?\s*)([^<]+)\s*/)[2].replace(/\s+/g, " ").replace(/ *(Pizza|Lasagna): .*/, "") # Run regex to get guest resturant name on current match, and access second element (the resturant name itself).  Then we need to replace multiple occurences of whitespace with a space (primarily to nuke newlines).  Finally, we add some 10W BS customization to strip everything after "Pizza: 
             if firstrun != true
               message = message + ", " + restaurantname
             else
@@ -80,7 +125,8 @@ module.exports = (robot) ->
         message = message + "\n"
       res.send message
 
-  send_aramark_guests2 =(url, intro, res) ->
+
+  send_aramark_guests_style2 =(url, intro, res) ->
     robot.http(url).get() (err, response, body) ->
       message = "" + intro
       split_data = body.split('Column" class="foodMenuDayColumn">')
@@ -95,21 +141,17 @@ module.exports = (robot) ->
       split_data2[3] = split_data[3]
       split_data2[4] = split_data[4]
 
-
-      for numa in [0...5]
-        console.log "NUMBA " + numa
-        console.log split_data2[numa]
-
       for day in [0...5]# by 1
         guestpattern = ///
-          (<div\sclass=\"noNutritionalLink\">[^<\n]+)#[A-Za-z\s\.]+)
-        ///
+          (<div\sclass=\"noNutritionalLink\">[^<]+)
+        ///gmi
         guestmatch = split_data2[day].match(guestpattern)
         message = message + " >  " + days[day] + ":"
         try
           firstrun = true
           for i in guestmatch
-            restaurantname = i.match(/(<div\sclass=\"noNutritionalLink\">)\s*([^<\n]+)/)[2]
+            stripguest = i.replace(/\s*Guest\s*Restaurant:?\s*/gi, ""); # Strip off any occurences of Guest Restaurant
+            restaurantname = stripguest.match(/(<div\sclass=\"noNutritionalLink\">)\s*([^<\n\r]+)[\s]*/)[2];
             if firstrun != true
               message = message + ", " + restaurantname
             else
@@ -118,7 +160,27 @@ module.exports = (robot) ->
         message = message + "\n"
       res.send message
 
-  robot.hear /mmenu/gim, (res) ->
-    #send_aramark_guests("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1", "Plaza 1: \n", res)
-    #send_aramark_guests2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3743&pageid=20&stationID=-1", "Plaza 3: \n", res)
-    send_aramark_guests2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3743&pageid=20&menuid=10510&stationID=1723", "Plaza 3: \n", res)
+
+  robot.hear /!guest/gim, (res) ->
+    send_aramark_guests_style1("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1", "Plaza 1: \n", res)
+    send_aramark_guests_style2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3743&pageid=20&menuid=10510&stationID=1723", "Plaza 3: \n", res)
+    send_aramark_guests_style2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4510&pageid=20&stationID=1938", "Front Street: \n", res)
+    send_aramark_guests_style2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3887&pageid=20&menuid=11454&stationID=1721", "Plaza 2: \n", res)
+    send_aramark_guests_style1("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3971&pageid=20&stationID=-1", "10 West: \n", res)
+    send_aramark_guests_style2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3746&pageid=20&stationID=1751", "Marconi: \n", res)
+    
+
+  send_planes_in_air =(planes, res) ->
+    plane_loc_url = "https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json"
+    robot.http(plane_loc_url).get() (err, response, body) ->
+      plane_data = JSON.parse(body)
+      found_plane = false
+      for plane in plane_data.acList
+        if plane.Reg in planes
+          found_plane = true
+          res.send(plane.Reg + " is underway\nLatitude: " + plane.Lat + "\nLongitude: " + plane.Long + "\nModel: " + plane.Mdl + "\nFlight Info: https://flightaware.com/live/flight/" + plane.Reg + "\n\n")
+      if (found_plane == false)
+        res.send("No planes in the air")
+
+  robot.hear /zeplane/gim, (res) ->
+    send_planes_in_air(["N286MP","N551CP","N553CP","N556CP","N557CP","N558CP","N113HP","N12HP","N17HP","N18HP","N19HP","N311HP","N514HP","N6HP","N717HP","N71HP","N73HP"], res)
