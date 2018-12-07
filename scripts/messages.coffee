@@ -10,7 +10,7 @@ module.exports = (robot) ->
     res.send " > At the end of the day."
 
   robot.hear /sp(a|i)toon/gim, (res) ->
-    res.send " > If I pick up a can and it's got spit in it, I'm not gonna say a word.  I'll go get in my kudober, drive to my house, grab my shotgun, and BLOW YOUR MOTHER FUCKING HEAD OFF!"
+    res.send " > If I pick up a can and it's got spit in it, I'm not gonna say a word.  I'm gonna get in my kudober, drive to my house on Victoria Boulevard, grab my shotgun, drive back and BLOW YOUR MOTHER FUCKING HEAD OFF!"
 
   robot.hear /problem/gim, (res) ->
     res.send " > I believe you mean, Opportunity."
