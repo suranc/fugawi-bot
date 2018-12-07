@@ -17,6 +17,9 @@ module.exports = (robot) ->
 
   robot.hear /upset/gim, (res) ->
     res.send " > I believe you mean, peptomistic."
+  
+  robot.hear /phil/gim, (res) ->
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/mjDivAn.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
   robot.hear /peptomis(m|tic)/gim, (res) ->
     pepto = res.match[0]
