@@ -75,7 +75,7 @@ module.exports = (robot) ->
   robot.hear /pork/gim, (res) ->
     # Date object for getting current time
     time = new Date
-    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/qSQtz6a.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/3NTlsLp.jpg?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
   # Tech Sergeant Richardsonify
   robot.hear /^\s*(!tsr)(.*)/i, (res) ->
