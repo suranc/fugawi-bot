@@ -40,8 +40,13 @@ module.exports = (robot) ->
   robot.hear /stuck/gim, (res) ->
     # Date object for getting current time
     time = new Date
-    robot.adapter.client.web.chat.postMessage(res.message.room, "hhttps://i.imgur.com/BLnJWJ0.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/BLnJWJ0.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
+  robot.hear /time/gim, (res) ->
+    # Date object for getting current time
+    time = new Date
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/Aq5VEn1.gif"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+  
   robot.hear /matt/gim, (res) ->
     # Date object for getting current time
     time = new Date
