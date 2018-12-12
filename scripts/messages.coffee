@@ -45,18 +45,23 @@ module.exports = (robot) ->
   robot.hear /peace/gim, (res) ->
     # Date object for getting current time
     time = new Date
-    robot.adapter.client.web.chat.postMessage(res.message.room, "https://media.giphy.com/media/26tnnNu7zu9jabiY8/giphy.gif"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://media.giphy.com/media/26tnnNu7zu9jabiY8/giphy.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
   
   robot.hear /rules/gim, (res) ->
     # Date object for getting current time
     time = new Date
-    robot.adapter.client.web.chat.postMessage(res.message.room, "https://media.giphy.com/media/V12SNTSFMOD4s/giphy.gif"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://media.giphy.com/media/V12SNTSFMOD4s/giphy.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
   
   robot.hear /cold/gim, (res) ->
     # Date object for getting current time
     time = new Date
-    robot.adapter.client.web.chat.postMessage(res.message.room, "https://media.giphy.com/media/RiDZXTqTJSXV6/giphy.gif"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://media.giphy.com/media/RiDZXTqTJSXV6/giphy.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
   
+  robot.hear /winter/gim, (res) ->
+    # Date object for getting current time
+    time = new Date
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://media.giphy.com/media/RiDZXTqTJSXV6/giphy.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+ 
   robot.hear /time/gim, (res) ->
     # Date object for getting current time
     time = new Date
