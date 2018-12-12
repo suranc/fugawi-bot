@@ -52,12 +52,7 @@ module.exports = (robot) ->
     time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://media.giphy.com/media/V12SNTSFMOD4s/giphy.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
   
-  robot.hear /cold/gim, (res) ->
-    # Date object for getting current time
-    time = new Date
-    robot.adapter.client.web.chat.postMessage(res.message.room, "https://media.giphy.com/media/RiDZXTqTJSXV6/giphy.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
-  
-  robot.hear /winter/gim, (res) ->
+  robot.hear /(cold|winter)/gim, (res) ->
     # Date object for getting current time
     time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://media.giphy.com/media/RiDZXTqTJSXV6/giphy.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
