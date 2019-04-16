@@ -57,7 +57,7 @@ module.exports = (robot) ->
     time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://media.giphy.com/media/RiDZXTqTJSXV6/giphy.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
  
-  robot.hear /time/gim, (res) ->
+  robot.hear /(^\s*|\s+)time(\s*$|\s+)/gim, (res) ->
     # Date object for getting current time
     time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/Aq5VEn1.gif"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
