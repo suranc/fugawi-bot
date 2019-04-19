@@ -57,7 +57,7 @@ module.exports = (robot) ->
     time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://media.giphy.com/media/RiDZXTqTJSXV6/giphy.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
  
-  robot.hear /time/gim, (res) ->
+  robot.hear /(^\s*|\s+)time(\s*$|\s+|\.|\!)/gim, (res) ->
     # Date object for getting current time
     time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/Aq5VEn1.gif"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
@@ -112,7 +112,7 @@ module.exports = (robot) ->
   robot.hear /^\s*(!ytrnd)\s*([^|]+)\|(.*)/i, (res) ->
     res.send "http://tsr.mangler.club/?" + "line1=" + encodeURIComponent(res.match[2]) + "&line2=" + encodeURIComponent(res.match[3])
   
-  robot.hear /(^\s*|\s+)son(\s*$|\s+)/gim, (res) ->
+  robot.hear /(^\s*|\s+)son(\s*$|\s+|\.|\!)/gim, (res) ->
     res.send " > If you were my son, I'd throw you through that fuckin' wall!"
 
   robot.hear /great( *)job/gim, (res) ->
