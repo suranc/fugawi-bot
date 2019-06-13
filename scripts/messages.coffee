@@ -201,12 +201,12 @@ module.exports = (robot) ->
 
 
   robot.hear /!guest/gim, (res) ->
-    send_aramark_guests_style1("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=-1", "Plaza 1: \n", res)
-    send_aramark_guests_style2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3743&pageid=20&menuid=10510&stationID=1723", "Plaza 3: \n", res)
+    send_aramark_guests_style2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3747&pageid=20&stationID=1938", "Plaza 1: \n", res)
+    send_aramark_guests_style2("http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3743&pageid=20&stationID=1938", "Plaza 3: \n", res)
     send_aramark_guests_style2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=4510&pageid=20&stationID=1938", "Front Street: \n", res)
-    send_aramark_guests_style2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3887&pageid=20&menuid=11454&stationID=1721", "Plaza 2: \n", res)
+    send_aramark_guests_style2("http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3887&pageid=20&stationID=1938", "Plaza 2: \n", res)
     send_aramark_guests_style1("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3971&pageid=20&stationID=-1", "10 West: \n", res)
-    send_aramark_guests_style2("http://aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3746&pageid=20&stationID=1751", "Marconi: \n", res)
+    send_aramark_guests_style2("http://www.aramarkcafe.com/layouts/canary_2015/locationhome.aspx?locationid=3746&pageid=20&stationID=1938", "Marconi: \n", res)
     
 
   send_planes_in_air =(planes, res) ->
