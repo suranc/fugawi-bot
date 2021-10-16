@@ -30,7 +30,7 @@ module.exports = (robot) ->
   robot.hear /bing/gim, (res) ->
     # Date object for getting current time
     time = new Date
-    robot.adapter.client.web.chat.postMessage(res.message.room, "http://i.suran.rocks/bing.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+    robot.adapter.client.web.chat.postMessage(res.message.room, "http://i.mangler.cyou/bing.gif?"+time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
 
   robot.hear /!wink/gim, (res) ->
     # Date object for getting current time
@@ -106,11 +106,11 @@ module.exports = (robot) ->
 
   # You're The Lumberg Now Dawg
   robot.hear /^\s*(!ytlnd)\s*(.*)/i, (res) ->
-    res.send "http://lumberg.suran.rocks/?" + "line=" + encodeURIComponent(res.match[2])
+    res.send "http://lumberg.mangler.cyou/?" + "line=" + encodeURIComponent(res.match[2])
 
   # You're The Richardson Now Dawg
   robot.hear /^\s*(!ytrnd)\s*([^|]+)\|(.*)/i, (res) ->
-    res.send "http://tsr.suran.rocks/?" + "line1=" + encodeURIComponent(res.match[2]) + "&line2=" + encodeURIComponent(res.match[3])
+    res.send "http://tsr.mangler.cyou/?" + "line1=" + encodeURIComponent(res.match[2]) + "&line2=" + encodeURIComponent(res.match[3])
   
   robot.hear /(^\s*|\s+)son(\s*$|\s+|\.|\!)/gim, (res) ->
     res.send " > If you were my son, I'd throw you through that fuckin' wall!"
