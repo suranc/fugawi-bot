@@ -1,6 +1,6 @@
 # fugawi-bot
 
-This is a bot for The Fugawi Slack community.  It's a collection of useful functions and inside jokes.  
+This is a bot for The Fugawi Slack community.  It's a collection of useful functions and inside jokes. Runs in Heroku. 
 
 ## To run locally
 
