@@ -5,24 +5,20 @@
   "author": "Chris Suran <migarjo@github.com>",
   "description": "An inside joke but for the wandering nomads known as 'The Fugawi'",
   "dependencies": {
-    "coffee-script": "^1.12.6",
-    "hubot": "^2.19.0",
+    "coffee-script": "^1.12.7",
+    "hubot": "^3.3.2",
     "hubot-diagnostics": "0.0.2",
     "hubot-google-images": "^0.2.7",
     "hubot-google-translate": "^0.2.1",
     "hubot-help": "^0.2.2",
-    "hubot-heroku-keepalive": "^1.0.3",
     "hubot-maps": "0.0.3",
     "hubot-pugme": "^0.1.1",
     "hubot-redis-brain": "0.0.4",
     "hubot-rules": "^0.1.2",
     "hubot-scripts": "^2.17.2",
     "hubot-shipit": "^0.2.1",
-    "hubot-slack": "4.4.0",
-    "xml2js": "^0.4.19"
-  },
-  "engines": {
-    "node": "0.10.x"
+    "hubot-slack": "^4.10.0",
+    "xml2js": "^0.4.23"
   },
   "scripts": {
     "start": "bin/hubot"
