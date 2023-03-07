@@ -29,6 +29,17 @@ pipeline:
           execution:
             steps:
               - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: alpine
+                    shell: Sh
+                    command: |-
+                      echo "<+secrets.getValue("slackToken")>"
+                      exit 1
+              - step:
                   type: BuildAndPushDockerRegistry
                   name: Build and Push an image to Docker Registry_1
                   identifier: BuildandPushanimagetoDockerRegistry_1
