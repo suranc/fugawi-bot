@@ -52,8 +52,12 @@ pipeline:
                 spec:
                   artifacts:
                     primary:
-                      primaryArtifactRef: <+input>
-                      sources: <+input>
+                      primaryArtifactRef: fugawi-image
+                      sources:
+                        - identifier: fugawi-image
+                          type: DockerRegistry
+                          spec:
+                            tag: latest
           environment:
             environmentRef: Prod
             deployToAll: false
