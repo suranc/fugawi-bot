@@ -37,6 +37,14 @@ pipeline:
             rollbackSteps: []
           service:
             serviceRef: fugawibotgitops
+            serviceInputs:
+              serviceDefinition:
+                type: Kubernetes
+                spec:
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
           environment:
             environmentRef: Prod
             deployToAll: true
