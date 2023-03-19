@@ -31,6 +31,7 @@ pipeline:
                   identifier: mergePR
                   spec:
                     deleteSourceBranch: true
+                    variables: []
                   timeout: 10m
               - step:
                   type: GitOpsFetchLinkedApps
@@ -59,3 +60,4 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
+        variables: []
