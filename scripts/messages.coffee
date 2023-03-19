@@ -7,7 +7,7 @@ module.exports = (robot) ->
     res.send " > I'm sorry, Dave. I'm afraid I can't do that."
 
   robot.hear /grumpy/gim, (res) ->
-    res.send "You gotta pay the Grumpy Troll toll"
+    res.send "You gotta pay the G r u m p y Troll toll"
 
   robot.hear /it is what it is/gim, (res) ->
     res.send " > At the end of the day."
