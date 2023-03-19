@@ -1,0 +1,32 @@
+inputSet:
+  name: master-push-inputset
+  identifier: masterpushinputset
+  orgIdentifier: default
+  projectIdentifier: Hubot
+  pipeline:
+    identifier: Build_and_Deploy_with_GitOps
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
+    stages:
+      - stage:
+          identifier: Deploy
+          type: Deployment
+          spec:
+            service:
+              serviceInputs:
+                serviceDefinition:
+                  type: Kubernetes
+                  spec:
+                    artifacts:
+                      primary:
+                        primaryArtifactRef: fugawi-bot
+                        sources:
+                          - identifier: fugawi-bot
+                            type: DockerRegistry
+                            spec:
+                              tag: latest
