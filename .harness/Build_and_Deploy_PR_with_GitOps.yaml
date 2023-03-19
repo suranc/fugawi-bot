@@ -1,0 +1,89 @@
+pipeline:
+  name: Build and Deploy PR with GitOps
+  identifier: Build_and_Deploy_PR_with_GitOps
+  projectIdentifier: Hubot
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.suranc_Account_Level
+        repoName: fugawi-bot
+        build: <+input>
+  stages:
+    - stage:
+        name: Build
+        identifier: Build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: account.sacluster
+              namespace: chris-builds
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: Build and Push an image to Docker Registry_1
+                  identifier: BuildandPushanimagetoDockerRegistry_1
+                  spec:
+                    connectorRef: account.Account_Level_suranc_GitHub_Docker_Registry
+                    repo: ghcr.io/suranc/fugawi-bot
+                    tags:
+                      - release-<+codebase.shortCommitSha>
+    - stage:
+        name: Deploy
+        identifier: Deploy
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          gitOpsEnabled: true
+          execution:
+            steps:
+              - step:
+                  type: GitOpsUpdateReleaseRepo
+                  name: Update Release Repo
+                  identifier: updateReleaseRepo
+                  timeout: 10m
+                  spec:
+                    variables:
+                      - name: imageTag
+                        type: String
+                        value: <+pipeline.stages.Build.spec.execution.steps.BuildandPushanimagetoDockerRegistry_1.artifact_BuildandPushanimagetoDockerRegistry_1.stepArtifacts.publishedImageArtifacts[0].tag>
+              - step:
+                  type: MergePR
+                  name: Merge PR
+                  identifier: mergePR
+                  spec:
+                    deleteSourceBranch: true
+                    variables: []
+                  timeout: 10m
+            rollbackSteps: []
+          service:
+            serviceRef: fugawibotgitops
+            serviceInputs:
+              serviceDefinition:
+                type: Kubernetes
+                spec:
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
+          environment:
+            environmentRef: Prod
+            deployToAll: true
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
+        variables: []
