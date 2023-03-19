@@ -74,8 +74,12 @@ pipeline:
                 spec:
                   artifacts:
                     primary:
-                      primaryArtifactRef: <+input>
-                      sources: <+input>
+                      primaryArtifactRef: fugawi-bot
+                      sources:
+                        - identifier: fugawi-bot
+                          type: DockerRegistry
+                          spec:
+                            tag: latest
           environment:
             environmentRef: pr
             deployToAll: true
