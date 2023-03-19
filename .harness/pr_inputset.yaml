@@ -1,0 +1,14 @@
+inputSet:
+  name: PR Inputset
+  identifier: PR_Inputset
+  orgIdentifier: default
+  projectIdentifier: Hubot
+  pipeline:
+    identifier: Build_and_Deploy_PR_with_GitOps
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
