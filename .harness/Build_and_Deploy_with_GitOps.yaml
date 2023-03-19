@@ -20,7 +20,11 @@ pipeline:
                   name: Update Release Repo
                   identifier: updateReleaseRepo
                   timeout: 10m
-                  spec: {}
+                  spec:
+                    variables:
+                      - name: imageTag
+                        type: String
+                        value: "0.02"
               - step:
                   type: MergePR
                   name: Merge PR
