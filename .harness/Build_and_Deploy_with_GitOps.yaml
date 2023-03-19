@@ -36,7 +36,7 @@ pipeline:
                     connectorRef: account.Account_Level_suranc_GitHub_Docker_Registry
                     repo: ghcr.io/suranc/fugawi-bot
                     tags:
-                      - latest
+                      - release-<+codebase.shortCommitSha>
     - stage:
         name: Deploy
         identifier: Deploy
@@ -56,7 +56,7 @@ pipeline:
                     variables:
                       - name: imageTag
                         type: String
-                        value: <+artifact.tag>
+                        value: <+pipeline.stages.Build.spec.execution.steps.BuildandPushanimagetoDockerRegistry_1.artifact_BuildandPushanimagetoDockerRegistry_1.stepArtifacts.publishedImageArtifacts[0].tag>
               - step:
                   type: MergePR
                   name: Merge PR
