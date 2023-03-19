@@ -77,7 +77,7 @@ pipeline:
                       primaryArtifactRef: <+input>
                       sources: <+input>
           environment:
-            environmentRef: Prod
+            environmentRef: pr
             deployToAll: true
         tags: {}
         failureStrategies:
