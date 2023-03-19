@@ -24,7 +24,7 @@ pipeline:
                     variables:
                       - name: imageTag
                         type: String
-                        value: "0.02"
+                        value: <+artifact.tag>
               - step:
                   type: MergePR
                   name: Merge PR
