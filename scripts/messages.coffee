@@ -138,6 +138,10 @@ module.exports = (robot) ->
     time = new Date
     robot.adapter.client.web.chat.postMessage(res.message.room, "https://youtu.be/u8YQEyrbVpE?t=32", {as_user: true, unfurl_media: true})
 
+  robot.hear /(dave'?s\s*mo(m|ther))|(anal(ysis|ize)?)/gim, (res) ->
+    time = new Date
+    robot.adapter.client.web.chat.postMessage(res.message.room, "https://i.imgur.com/UKOmuJn.jpeg" + time.getMinutes() + time.getSeconds(), {as_user: true, unfurl_media: true})
+
   send_planes_in_air =(planes, res) ->
     plane_loc_url = "https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json"
     robot.http(plane_loc_url).get() (err, response, body) ->
