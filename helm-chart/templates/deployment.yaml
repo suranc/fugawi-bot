@@ -36,6 +36,8 @@ spec:
           env:
           - name: HUBOT_SLACK_TOKEN
             value: {{ .Values.slackToken }}
+          - name: OPENAI_API_KEY
+            value: {{ .Values.openapiToken }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
