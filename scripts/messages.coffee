@@ -159,7 +159,7 @@ module.exports = (robot) ->
 
   robot.hear /(!img)(.*)/gim, (res) ->
     data = JSON.stringify({
-      prompt: `${res.match[2]}`,
+      prompt: res.match[2],
       n: 1,
       size: '1024x1024'
     })
