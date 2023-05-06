@@ -167,5 +167,5 @@ module.exports = (robot) ->
       .header('Content-Type', 'application/json')
       .header('Authorization', process.env.OPENAI_API_KEY)
       .get() (err, response, body) ->
-        image_data = = JSON.parse(body)
+        image_data = JSON.parse(body)
         res.send(image_data.data[0].url)
