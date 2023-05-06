@@ -156,3 +156,16 @@ module.exports = (robot) ->
 
   robot.hear /zeplane/gim, (res) ->
     send_planes_in_air(["N286MP","N551CP","N553CP","N556CP","N557CP","N558CP","N113HP","N12HP","N17HP","N18HP","N19HP","N311HP","N514HP","N6HP","N717HP","N71HP","N73HP"], res)
+
+  robot.hear /(!img)(.*)/gim, (res) ->
+    data = JSON.stringify({
+      prompt: `${res.match[2]}`,
+      n: 1,
+      size: '1024x1024'
+    })
+    robot.http("https://api.openai.com/v1/images/generations")
+      .header('Content-Type', 'application/json')
+      .header('Authorization', process.env.OPENAI_API_KEY)
+      .get() (err, response, body) ->
+        image_data = = JSON.parse(body)
+        res.send(image_data.data[0].url)
