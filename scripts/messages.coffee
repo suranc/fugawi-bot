@@ -168,4 +168,4 @@ module.exports = (robot) ->
       .header('Authorization', 'Bearer ' + process.env.OPENAI_API_KEY)
       .post(data) (err, response, body) ->
         image_data = JSON.parse(body)
-        res.send(image_data.data[0].url)
+        res.send("<" + image_data.data[0].url + "|" + res.match[2] + ">")
