@@ -165,7 +165,7 @@ module.exports = (robot) ->
     })
     robot.http("https://api.openai.com/v1/images/generations")
       .header('Content-Type', 'application/json')
-      .header('Authorization', process.env.OPENAI_API_KEY)
+      .header('Authorization', 'Bearer ' + process.env.OPENAI_API_KEY)
       .get() (err, response, body) ->
         image_data = JSON.parse(body)
         res.send(image_data.data[0].url)
